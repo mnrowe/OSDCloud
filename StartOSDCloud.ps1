@@ -104,4 +104,17 @@ $AutopilotOOBEJson = @"
  if (!(Test-Path "C:\ProgramData\OSDeploy")) {
 	New-Item "C:\ProgramData\OSDeploy" -ItemType Directory -Force | Out-Null
  }
-$AutopilotOOBEJson | Out-File -FilePath "C:\ProgramData\OSDeploy\OSDeploy.AutopilotOOBE.json" -Encoding ascii -Force 
+$AutopilotOOBEJson | Out-File -FilePath "C:\ProgramData\OSDeploy\OSDeploy.AutopilotOOBE.json" -Encoding ascii -Force
+
+#================================================
+#  [PostOS] AutopilotOOBE CMD Command Line
+#================================================
+Write-Host -ForegroundColor Green "Create C:\Windows\System32\OOBE.cmd"
+$OOBECMD = @'
+PowerShell -NoL -Com Set-ExecutionPolicy RemoteSigned -Force
+Set Path = %PATH%;C:\Program Files\WindowsPowerShell\Scripts
+Start /Wait PowerShell -NoL -C Install-Module AutopilotOOBE -Force -Verbose
+Start /Wait PowerShell -NoL -C Install-Module OSD -Force -Verbose
+Start /Wait PowerShell -NoL -C Restart-Computer -Force
+'@
+$OOBECMD | Out-File -FilePath 'C:\Windows\System32\OOBE.cmd' -Encoding ascii -Force
