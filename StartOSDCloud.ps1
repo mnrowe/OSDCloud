@@ -89,6 +89,7 @@ Start /Wait PowerShell -NoL -C Install-Module OSD -Force -Verbose
 Start /Wait PowerShell -NoL -C Invoke-RestMethod https://raw.githubusercontent.com/mnrowe/OSDCloud/main/Install-EmbeddedProductKey.ps1
 Start /Wait PowerShell -NoL -C Invoke-RestMethod https://raw.githubusercontent.com/mnrowe/OSDCloud/main/ap-prereq.ps1
 Start /Wait PowerShell -NoL -C Invoke-RestMethod https://raw.githubusercontent.com/mnrowe/OSDCloud/main/Start-AutopilotOOBE.ps1
+Start /Wait PowerShell -NoL -C Invoke-RestMethod https://raw.githubusercontent.com/mnrowe/OSDCloud/main/get-tpm.ps1
 Start /Wait PowerShell -NoL -C Start-OOBEDeploy
 Start /Wait PowerShell -NoL -C Restart-Computer -Force
 '@
