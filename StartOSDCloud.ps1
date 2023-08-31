@@ -41,6 +41,7 @@ $AutopilotOOBEJson = @"
                     ],
         "PostAction":  "Quit",
         "Run":  "NetworkingWireless",
+        "Docs":  "https://google.com/",
         "Title":  "Manual Autopilot Register"
     }
 "@
