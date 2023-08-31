@@ -1,12 +1,66 @@
-Write-Host -ForegroundColor Blue "Starting OSDDCloud ZTI"
-Start-Sleep -Seconds 5
+if ((Get-MyComputerModel) -match 'Virtual') {
+    Write-Host  -ForegroundColor Green "Setting Display Resolution to 1600x"
+    Set-DisRes 1600
+}
 
-Start-OSDCloud -OSVersion 'Windows 11' -OSBuild 22H2 -OSEdition Pro -OSLicense Retail
+Write-Host -ForegroundColor Green "Updating OSD PowerShell Module"
+Install-Module OSD -Force
 
-Start-Sleep -Seconds 5
+Write-Host  -ForegroundColor Green "Importing OSD PowerShell Module"
+Import-Module OSD -Force   
+
+#=======================================================================
+#   [OS] Params and Start-OSDCloud
+#=======================================================================
+$Params = @{
+    OSVersion = "Windows 11"
+    OSBuild = "22H2"
+    OSEdition = "Pro"
+    OSLanguage = "en-us"
+    OSLicense = "Retail"
+    ZTI = $true
+    Firmware = $true
+}
+Start-OSDCloud @Params
+
 
 $OOBEDeployJson = @'
 {
+    "AddNetFX3":  {
+                      "IsPresent":  true
+                  },
+    "Autopilot":  {
+                      "IsPresent":  false
+                  },
+    "RemoveAppx":  [
+                    "MicrosoftTeams",
+                    "Microsoft.BingWeather",
+                    "Microsoft.BingNews",
+                    "Microsoft.GamingApp",
+                    "Microsoft.GetHelp",
+                    "Microsoft.Getstarted",
+                    "Microsoft.Messaging",
+                    "Microsoft.MicrosoftOfficeHub",
+                    "Microsoft.MicrosoftSolitaireCollection",
+                    "Microsoft.MicrosoftStickyNotes",
+                    "Microsoft.MSPaint",
+                    "Microsoft.People",
+                    "Microsoft.PowerAutomateDesktop",
+                    "Microsoft.StorePurchaseApp",
+                    "Microsoft.Todos",
+                    "microsoft.windowscommunicationsapps",
+                    "Microsoft.WindowsFeedbackHub",
+                    "Microsoft.WindowsMaps",
+                    "Microsoft.WindowsSoundRecorder",
+                    "Microsoft.Xbox.TCUI",
+                    "Microsoft.XboxGameOverlay",
+                    "Microsoft.XboxGamingOverlay",
+                    "Microsoft.XboxIdentityProvider",
+                    "Microsoft.XboxSpeechToTextOverlay",
+                    "Microsoft.YourPhone",
+                    "Microsoft.ZuneMusic",
+                    "Microsoft.ZuneVideo"
+                   ],
     "UpdateDrivers":  {
                           "IsPresent":  true
                       },
