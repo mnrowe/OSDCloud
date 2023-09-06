@@ -120,12 +120,12 @@ PowerShell -NoL -Com Set-ExecutionPolicy RemoteSigned -Force
 Set Path = %PATH%;C:\Program Files\WindowsPowerShell\Scripts
 Start /Wait PowerShell -NoL -C Install-Module AutopilotOOBE -Force -Verbose
 Start /Wait PowerShell -NoL -C Install-Module OSD -Force -Verbose
-Start /Wait PowerShell -NoL -C Invoke-RestMethod https://raw.githubusercontent.com/mnrowe/OSDCloud/main/Install-EmbeddedProductKey.ps1
-Start /Wait PowerShell -NoL -C Invoke-RestMethod https://raw.githubusercontent.com/mnrowe/OSDCloud/main/ap-prereq.ps1
-Start /Wait PowerShell -NoL -C Invoke-RestMethod https://raw.githubusercontent.com/mnrowe/OSDCloud/main/Start-AutopilotOOBE.ps1
+Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/mnrowe/OSDCloud/main/Install-EmbeddedProductKey.ps1
+Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/mnrowe/OSDCloud/main/ap-prereq.ps1
+Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/mnrowe/OSDCloud/main/Start-AutopilotOOBE.ps1
 Start /Wait PowerShell -NoL -C Start-OOBEDeploy
-Start /Wait PowerShell -NoL -C Invoke-RestMethod https://raw.githubusercontent.com/mnrowe/OSDCloud/main/get-tpm.ps1
-Start /Wait PowerShell -NoL -C Invoke-RestMethod https://raw.githubusercontent.com/mnrowe/OSDCloud/main/start-cleanup.ps1
+Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/mnrowe/OSDCloud/main/get-tpm.ps1
+Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/mnrowe/OSDCloud/main/start-cleanup.ps1
 Start /Wait PowerShell -NoL -C Restart-Computer -Force
 '@
 $OOBECMD | Out-File -FilePath 'C:\Windows\System32\OOBE.cmd' -Encoding ascii -Force
