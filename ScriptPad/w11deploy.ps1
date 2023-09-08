@@ -126,7 +126,7 @@ Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.
 Start /Wait PowerShell -NoL -C Start-OOBEDeploy
 Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/mnrowe/OSDCloud/main/get-tpm.ps1
 Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/mnrowe/OSDCloud/main/start-cleanup.ps1
-Start /Wait Powershell -NoL -C Invoke-WebPSScript 
+Start /Wait Powershell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/mnrowe/OSDCloud/main/set-rename.ps1
 Start /Wait PowerShell -NoL -C Restart-Computer -Force
 '@
 $OOBECMD | Out-File -FilePath 'C:\Windows\System32\OOBE.cmd' -Encoding ascii -Force
