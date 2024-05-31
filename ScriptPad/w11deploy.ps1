@@ -14,7 +14,7 @@ Import-Module OSD -Force
 #=======================================================================
 $Params = @{
     OSVersion = "Windows 11"
-    OSBuild = "22H2"
+    OSBuild = "23H2"
     OSEdition = "Pro"
     OSLanguage = "en-us"
     Firmware = $true
@@ -69,7 +69,7 @@ $OOBEDeployJson = @'
                           "IsPresent":  true
                       },
     "UpdateWindows":  {
-                          "IsPresent":  true
+                          "IsPresent":  false
                       }
 }
 '@
@@ -80,9 +80,6 @@ If (!(Test-Path "C:\ProgramData\OSDeploy")) {
 $OOBEDeployJson | Out-File -FilePath "C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json" -Encoding ascii -Force
 
 Start-Sleep -Seconds 5
-
-$AssignedComputerName = Read-Host "Computer name:" 
-
 
 $AutopilotOOBEJson = @"
     {
@@ -126,7 +123,6 @@ Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.
 Start /Wait PowerShell -NoL -C Start-OOBEDeploy
 Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/mnrowe/OSDCloud/main/get-tpm.ps1
 Start /Wait PowerShell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/mnrowe/OSDCloud/main/start-cleanup.ps1
-Start /Wait Powershell -NoL -C Invoke-WebPSScript https://raw.githubusercontent.com/mnrowe/OSDCloud/main/set-rename.ps1
 Start /Wait PowerShell -NoL -C Restart-Computer -Force
 '@
 $OOBECMD | Out-File -FilePath 'C:\Windows\System32\OOBE.cmd' -Encoding ascii -Force
